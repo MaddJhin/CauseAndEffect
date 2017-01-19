@@ -11,8 +11,11 @@ public class Portal : MonoBehaviour {
     {
         if(!is_exiting)
         {
-            linkedPortal.is_exiting = true;
-            col.transform.position = linkedPortal.transform.position;
+            if (linkedPortal != null)
+            {
+                linkedPortal.is_exiting = true;
+                col.transform.position = linkedPortal.transform.position;
+            }
         }
     }
 
