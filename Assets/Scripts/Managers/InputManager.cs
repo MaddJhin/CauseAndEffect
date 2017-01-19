@@ -93,6 +93,7 @@ public class InputManager : MonoBehaviour
         ObjectSpawn areaPlaced = hit.collider.gameObject.GetComponent<ObjectSpawn>();
         areaPlaced.PlaceObject(currentObject);
         areaPlaced.RemoveHighlight();
+        UpdateHighlights();
 
     }
 
@@ -160,6 +161,15 @@ public class InputManager : MonoBehaviour
             {
                 area.HighlightBlockPlacement();
             }
+        }
+    }
+
+    public void UpdateHighlights()
+    {
+        foreach (PlacementArea area in placementAreas)
+        {
+            if (area.SpherePlaced())
+                area.RemoveHighlight();
         }
     }
 
