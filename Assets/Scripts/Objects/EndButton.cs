@@ -16,7 +16,10 @@ public class EndButton : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D collider)
     {
-        if(collider.gameObject.tag == "Block" || collider.gameObject.tag == "CatapultBall" || collider.gameObject.tag == "Bolt")
+        if(collider.gameObject.tag == "Block" || 
+            collider.gameObject.tag == "CatapultBall" || 
+            collider.gameObject.tag == "Bolt" ||
+            collider.gameObject.tag == "TriggerObject")
         {
             DumpThing(collider.gameObject);
             amountHit++;
