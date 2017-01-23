@@ -15,6 +15,7 @@ public class BallistaArrow : MonoBehaviour
     private Vector3 startPosition;
     private Quaternion startRotation;
     private int bouncesLeft;
+    private float angle;
 
     void Awake()
     {
@@ -25,6 +26,7 @@ public class BallistaArrow : MonoBehaviour
 
     void Update()
     {
+        //NextDirection();
         Debug.DrawRay(rayOrigin.transform.position, rayOrigin.transform.right);
     }
 
@@ -71,21 +73,27 @@ public class BallistaArrow : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collider)
     {
-        bouncesLeft--;
 
         if (bouncesLeft == 0)
         {
             TurnOff();
             return;
         }
-
         Vector3 endPoint = b.origin + 3 * b.direction;
         Vector3 dir = endPoint - transform.position;
-        var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-
         body.velocity = new Vector2(transform.right.x, transform.right.y) * speed;
+
         NextDirection();
+
+        bouncesLeft--;
+        //CalculateBounce();
+    }
+
+    void CalculateBounce()
+    {
+
     }
 
     public void TurnOff()
