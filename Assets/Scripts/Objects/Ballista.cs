@@ -18,7 +18,8 @@ public class Ballista : MonoBehaviour {
 
     void Awake()
     {
-        arrowSprite = arrow.GetComponent<SpriteRenderer>();
+        if (arrow != null)
+            arrowSprite = arrow.GetComponent<SpriteRenderer>();
     }
 
     void OnEnable()

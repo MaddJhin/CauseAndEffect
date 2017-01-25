@@ -114,6 +114,7 @@
     <Compile Include="Assets\Scripts\Platforms\MovingPlatfrm.cs" />
     <Compile Include="Assets\Scripts\Platforms\PlacementArea.cs" />
     <Compile Include="Assets\Scripts\Platforms\PlatformTrigger.cs" />
+    <Compile Include="Assets\Scripts\Test\ArrowBounceTest.cs" />
     <Compile Include="Assets\Scripts\Test\BlockNew.cs" />
     <Compile Include="Assets\Scripts\Test\BlockSpawn.cs" />
     <Compile Include="Assets\Scripts\Test\DragMe.cs" />
