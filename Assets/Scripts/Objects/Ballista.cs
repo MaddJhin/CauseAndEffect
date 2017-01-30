@@ -1,9 +1,16 @@
-﻿using UnityEngine;
+﻿#define bounceTest
+using UnityEngine;
 using System.Collections;
 
 public class Ballista : MonoBehaviour {
 
+    //public BallistaArrow arrow;
+#if bounceTest
+    public ArrowBounceTest arrow;
+#elif (!bouncTest)
     public BallistaArrow arrow;
+#endif
+
     public Sprite frame0;
     public Sprite frame1;
     public SpriteRenderer ballistaSprite;
@@ -18,6 +25,13 @@ public class Ballista : MonoBehaviour {
 
     void Awake()
     {
+
+#if bounceTest
+        arrow = GetComponentInChildren<ArrowBounceTest>();
+#elif (!bounceTest)
+        if (arrow = null)
+            arrow = GetComponentInChildren<BallistaArrow>();
+#endif
         if (arrow != null)
             arrowSprite = arrow.GetComponent<SpriteRenderer>();
     }
