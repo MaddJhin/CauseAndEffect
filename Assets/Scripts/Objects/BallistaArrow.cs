@@ -5,17 +5,17 @@ public class BallistaArrow : MonoBehaviour
 {
     public float speed;
     public int bounces = 4;
-    public GameObject rayOrigin;
 
-    private Rigidbody2D body;
-    private Ray2D b;
-//    private Vector2 nextDirection;
     private SpriteRenderer sprite;
     private PolygonCollider2D col;
+    private Rigidbody2D body;
     private Vector3 startPosition;
     private Quaternion startRotation;
     private int bouncesLeft;
     private float angle;
+    private Vector2 origin;
+    private float timer;
+    private LayerMask layerMask;
 
     void Awake()
     {
@@ -24,76 +24,74 @@ public class BallistaArrow : MonoBehaviour
         col = GetComponent<PolygonCollider2D>();
     }
 
+    void Start()
+    {
+        layerMask = (1 << 0)
+                | (1 << 9)
+                | (1 << 10)
+                | (1 << 12);
+        //layerMask = ~layerMask;
+    }
+
+    // Update is called once per frame
     void Update()
     {
-        //NextDirection();
-        Debug.DrawRay(rayOrigin.transform.position, rayOrigin.transform.right);
-    }
+        timer += Time.deltaTime;
 
-    /*
-    void Update()
-    {
-        Ray2D a = new Ray2D(rayOrigin.transform.position, rayOrigin.transform.right);
-        RaycastHit2D hit = Physics2D.Raycast(rayOrigin.transform.position, rayOrigin.transform.right, 10f, 1);
+        RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, gameObject.transform.right, 0.5f, layerMask);
 
-        if (Deflect(a, out b, hit))
+        if (!hit)
         {
-            Debug.DrawLine(a.origin, hit.point);
-            Debug.DrawLine(b.origin, b.origin + 3 * b.direction);
+            UpdateAngle();
         }
-    }
-    */
+        //DeflectDraw();
 
-    bool Deflect(Ray2D ray, out Ray2D deflected, RaycastHit2D hit)
-    {
-
-        if (Physics2D.Raycast(rayOrigin.transform.position, rayOrigin.transform.right))
-        {
-            Vector2 normal = hit.normal;
-            Vector2 deflect = Vector2.Reflect(ray.direction, normal);
-
-            deflected = new Ray2D(hit.point, deflect);
-            return true;
-        }
-
-        deflected = new Ray2D(Vector3.zero, Vector3.zero);
-        return false;
     }
 
-    public void NextDirection()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        Ray2D a = new Ray2D(rayOrigin.transform.position, rayOrigin.transform.right);
-        RaycastHit2D hit = Physics2D.Raycast(rayOrigin.transform.position, rayOrigin.transform.right, 10f, 1);
-
-        if (Deflect(a, out b, hit))
-        {
-            //nextDirection = new Vector2(b.direction.x, b.direction.y);
-        }
-    }
-
-    void OnCollisionEnter2D(Collision2D collider)
-    {
-
         if (bouncesLeft == 0)
         {
             TurnOff();
             return;
         }
-        Vector3 endPoint = b.origin + 3 * b.direction;
-        Vector3 dir = endPoint - transform.position;
-        angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        body.velocity = new Vector2(transform.right.x, transform.right.y) * speed;
 
-        NextDirection();
+        float zRotation = ClampRotation(transform.rotation.eulerAngles.z + angle);
+        Debug.Log("New Z Roation is: " + zRotation);
+
+        if (timer > 0.1f)
+        {
+            transform.eulerAngles = new Vector3(transform.localRotation.eulerAngles.x,
+                                                transform.localRotation.eulerAngles.y,
+                                                zRotation);
+            body.velocity = new Vector2(transform.right.x, transform.right.y) * speed;
+            timer = 0;
+        }
 
         bouncesLeft--;
+        //Debug.Break();
         //CalculateBounce();
     }
 
-    void CalculateBounce()
+    void UpdateAngle()
     {
+        origin = Vector3toVector2(gameObject.transform.position);
 
+        RaycastHit2D hit = Physics2D.Raycast(origin, gameObject.transform.right, 100f, layerMask);
+        Debug.DrawLine(origin, hit.point);
+
+        Debug.Log("Collision Spot is: " + hit.point);
+        Debug.Log("Object hit is: " + hit.transform.gameObject.name);
+        Debug.DrawLine(origin, hit.point);
+
+        Vector3 dirrection = (hit.point - origin).normalized;
+        Vector3 reflectedVector = Vector3.Reflect(dirrection, hit.normal);
+
+        Debug.DrawRay(hit.point, reflectedVector * 10);
+
+        Vector3 firstVector = Vector2toVector3(hit.point) - gameObject.transform.position;
+
+        angle = AngleBetweenVector3(firstVector, reflectedVector);
     }
 
     public void TurnOff()
@@ -103,7 +101,7 @@ public class BallistaArrow : MonoBehaviour
         body.angularVelocity = 0f;
         col.enabled = false;
         transform.position = startPosition;
-        transform.rotation = startRotation;        
+        transform.rotation = startRotation;
     }
 
     public void Shoot()
@@ -112,7 +110,6 @@ public class BallistaArrow : MonoBehaviour
         sprite.enabled = true;
         col.enabled = true;
         body.velocity = new Vector2(transform.right.x, transform.right.y) * speed;
-        NextDirection();
     }
 
     public void Flip()
@@ -142,5 +139,56 @@ public class BallistaArrow : MonoBehaviour
     {
         GameEventManager.GameLaunch -= GameLaunch;
         GameEventManager.GameReset -= GameReset;
+    }
+
+    void DeflectDraw()
+    {
+        origin = Vector3toVector2(gameObject.transform.position);
+        RaycastHit2D hit = Physics2D.Raycast(origin, gameObject.transform.right, 100f, layerMask);
+        //Debug.Log("Layer hit is: " + LayerMask.LayerToName(layerMask));
+        Debug.Log("Collision Spot is: " + hit.point);
+        Debug.Log("Object hit is: " + hit.transform.gameObject.name);
+        Debug.DrawLine(origin, hit.point);
+
+        Vector3 dirrection = (hit.point - origin).normalized;
+        Vector3 reflectedVector = Vector3.Reflect(dirrection, hit.normal);
+
+        Debug.DrawRay(hit.point, reflectedVector * 10);
+    }
+
+    private float AngleBetweenVector2(Vector2 vec1, Vector2 vec2)
+    {
+        Vector2 diference = vec2 - vec1;
+        float sign = (vec2.y < vec1.y) ? -1.0f : 1.0f;
+        return Vector2.Angle(Vector2.right, diference) * sign;
+    }
+
+    private float AngleBetweenVector3(Vector3 vec1, Vector3 vec2)
+    {
+        float angle = Vector3.Angle(vec1, vec2);
+        Vector3 cross = Vector3.Cross(vec1, vec2);
+        if (cross.z < 0)
+            angle = -angle;
+        return angle;
+    }
+
+    private Vector2 Vector3toVector2(Vector3 vector)
+    {
+        Vector2 newVector = new Vector2(vector.x, vector.y);
+        return newVector;
+    }
+
+    private Vector3 Vector2toVector3(Vector2 vector)
+    {
+        Vector3 newVector = new Vector3(vector.x, vector.y, 0f);
+        return newVector;
+    }
+
+    private float ClampRotation(float angle)
+    {
+        if (angle > 360)
+            return angle - 360;
+        else
+            return angle;
     }
 }

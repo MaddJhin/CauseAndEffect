@@ -45,7 +45,7 @@ public class CameraControls : MonoBehaviour
 
         float clampY = ((background.bounds.size.y / 2) - targetOrtho - 0.3f);
         float clampX = ((background.bounds.size.x / 2) - (targetOrtho * cam.aspect) - 0.3f);
-        Debug.Log(clampY);
+        //Debug.Log(clampY);
 
         if (Input.GetMouseButton(0) )
         {

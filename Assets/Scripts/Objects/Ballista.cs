@@ -1,4 +1,4 @@
-﻿#define bounceTest
+﻿#define bounceTest_no
 using UnityEngine;
 using System.Collections;
 

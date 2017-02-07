@@ -15,6 +15,8 @@ public class ArrowBounceTest : MonoBehaviour {
     private int bouncesLeft;
     private float angle;
     private Vector2 origin;
+    private float timer;
+    private LayerMask layerMask;
 
     void Awake()
     {
@@ -23,18 +25,27 @@ public class ArrowBounceTest : MonoBehaviour {
         col = GetComponent<PolygonCollider2D>();
     }
 
+    void Start()
+    {
+        layerMask = (1 << 0)
+                | (1 << 9)
+                | (1 << 10)
+                | (1 << 12);
+        //layerMask = ~layerMask;
+    }
+
     // Update is called once per frame
     void Update () {
+        timer += Time.deltaTime;
 
-        RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, gameObject.transform.right, 1f, 1);
-
-        //DeflectDraw();        
-
+        RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, gameObject.transform.right, 0.5f, layerMask);
+        Debug.Log(!hit);
 
         if (!hit)
         {
             UpdateAngle();
         }
+        //DeflectDraw();
 
     }
 
@@ -46,18 +57,20 @@ public class ArrowBounceTest : MonoBehaviour {
             return;
         }
 
-
-        float zRotation = transform.rotation.z + angle;
-        Debug.Log("Angle is: " + angle);
-        Debug.Log("Local Z Rotation is: " + transform.rotation.z);
+        float zRotation = ClampRotation(transform.rotation.eulerAngles.z + angle);
         Debug.Log("New Z Roation is: " + zRotation);
-    
-        angle += transform.rotation.z;
-        transform.eulerAngles = new Vector3(transform.localRotation.x, transform.localRotation.y, angle);
-        body.velocity = new Vector2(transform.right.x, transform.right.y) * 0;
 
+        if (timer > 0.1f)
+        {
+            transform.eulerAngles = new Vector3(transform.localRotation.eulerAngles.x,
+                                                transform.localRotation.eulerAngles.y,
+                                                zRotation);
+            body.velocity = new Vector2(transform.right.x, transform.right.y) * speed;
+            timer = 0;
+        }
 
         bouncesLeft--;
+        //Debug.Break();
         //CalculateBounce();
     }
 
@@ -65,7 +78,11 @@ public class ArrowBounceTest : MonoBehaviour {
     {
         origin = Vector3toVector2(gameObject.transform.position);
 
-        RaycastHit2D hit = Physics2D.Raycast(origin, gameObject.transform.right, 100f, 1);
+        RaycastHit2D hit = Physics2D.Raycast(origin, gameObject.transform.right, 100f, layerMask);
+        Debug.DrawLine(origin, hit.point);
+
+        Debug.Log("Collision Spot is: " + hit.point);
+        Debug.Log("Object hit is: " + hit.transform.gameObject.name);
         Debug.DrawLine(origin, hit.point);
 
         Vector3 dirrection = (hit.point - origin).normalized;
@@ -73,17 +90,9 @@ public class ArrowBounceTest : MonoBehaviour {
 
         Debug.DrawRay(hit.point, reflectedVector * 10);
 
-        //Vector2 firstVector = hit.point - Vector3toVector2(origin);
-        //Vector2 secondVector = Vector3toVector2(reflectedVector);
-
         Vector3 firstVector = Vector2toVector3(hit.point) - gameObject.transform.position;
 
-        //Debug.DrawRay(hit.point, Vector3toVector2(origin));
-
-        //angle = AngleBetweenVector2(firstVector, secondVector);
         angle = AngleBetweenVector3(firstVector, reflectedVector);
-
-        //Debug.Log("Angle is: " + angle);
     }
 
     public void TurnOff()
@@ -135,7 +144,11 @@ public class ArrowBounceTest : MonoBehaviour {
 
     void DeflectDraw()
     {
-        RaycastHit2D hit = Physics2D.Raycast(origin, gameObject.transform.right, 100f, 1);
+        origin = Vector3toVector2(gameObject.transform.position);
+        RaycastHit2D hit = Physics2D.Raycast(origin, gameObject.transform.right, 100f, layerMask);
+        //Debug.Log("Layer hit is: " + LayerMask.LayerToName(layerMask));
+        Debug.Log("Collision Spot is: " + hit.point);
+        Debug.Log("Object hit is: " + hit.transform.gameObject.name);
         Debug.DrawLine(origin, hit.point); 
 
         Vector3 dirrection = (hit.point - origin).normalized;
@@ -170,5 +183,13 @@ public class ArrowBounceTest : MonoBehaviour {
     {
         Vector3 newVector = new Vector3(vector.x, vector.y, 0f);
         return newVector;
+    }
+
+    private float ClampRotation(float angle)
+    {
+        if (angle > 360)
+            return angle - 360;
+        else
+            return angle;
     }
 }
