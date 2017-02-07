@@ -29,8 +29,7 @@ public class Ballista : MonoBehaviour {
 #if bounceTest
         arrow = GetComponentInChildren<ArrowBounceTest>();
 #elif (!bounceTest)
-        if (arrow = null)
-            arrow = GetComponentInChildren<BallistaArrow>();
+        arrow = GetComponentInChildren<BallistaArrow>();
 #endif
         if (arrow != null)
             arrowSprite = arrow.GetComponent<SpriteRenderer>();

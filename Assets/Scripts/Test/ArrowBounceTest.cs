@@ -51,6 +51,7 @@ public class ArrowBounceTest : MonoBehaviour {
         Debug.Log("Angle is: " + angle);
         Debug.Log("Local Z Rotation is: " + transform.rotation.z);
         Debug.Log("New Z Roation is: " + zRotation);
+    
         angle += transform.rotation.z;
         transform.eulerAngles = new Vector3(transform.localRotation.x, transform.localRotation.y, angle);
         body.velocity = new Vector2(transform.right.x, transform.right.y) * 0;
