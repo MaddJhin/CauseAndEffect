@@ -14,6 +14,8 @@ public class ArrowBounceTest : MonoBehaviour {
     private Quaternion startRotation;
     private int bouncesLeft;
     private float angle;
+    private Vector3 bounceVector;
+    private Vector3 dirrection;
 
     void Awake()
     {
@@ -25,11 +27,15 @@ public class ArrowBounceTest : MonoBehaviour {
     // Update is called once per frame
     void Update () {
 
-        RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, gameObject.transform.right, 1f, 1);
+        RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, gameObject.transform.right, 1000f, 1);
+        DeflectDraw(hit);
 
-        if (!hit)
+        Debug.DrawLine(gameObject.transform.position, hit.point);
+        UpdateAngle();
+
+        if (hit)
         {
-            UpdateAngle();            
+                        
         }
 
     }
@@ -42,7 +48,11 @@ public class ArrowBounceTest : MonoBehaviour {
             return;
         }
 
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        //transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        Quaternion lookRotation = Quaternion.LookRotation(dirrection, Vector3.forward);
+        transform.rotation = lookRotation;
+        Debug.Log("Angle between teh angle on hit is: " + angle);
+
         body.velocity = new Vector2(transform.right.x, transform.right.y) * speed;
 
 
@@ -57,12 +67,17 @@ public class ArrowBounceTest : MonoBehaviour {
 
         RaycastHit2D hit2 = Physics2D.Raycast(hit.point, hit.point.normalized, Mathf.Infinity, 1);
         Vector2 origin = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
-        Vector3 dirrection = (hit.point - origin).normalized;
+        dirrection = (hit.point - origin).normalized;
 
         Vector3 reflectedVector = Vector3.Reflect(dirrection, hit.normal);
         Vector2 secondVector = Vector3toVector2(reflectedVector);
 
         angle = AngleBetweenVector2(firstVector, secondVector);
+
+        Debug.Log("Reflected Vector is: " + reflectedVector);   
+        Debug.Log("Angle between Vetor 2 is: " + angle);
+
+        bounceVector = reflectedVector;
     }
 
     public void TurnOff()
