@@ -14,6 +14,7 @@ public class ArrowBounceTest : MonoBehaviour {
     private Quaternion startRotation;
     private int bouncesLeft;
     private float angle;
+    private Vector2 origin;
 
     void Awake()
     {
@@ -27,9 +28,12 @@ public class ArrowBounceTest : MonoBehaviour {
 
         RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, gameObject.transform.right, 1f, 1);
 
+        //DeflectDraw();        
+
+
         if (!hit)
         {
-            UpdateAngle();            
+            UpdateAngle();
         }
 
     }
@@ -42,8 +46,14 @@ public class ArrowBounceTest : MonoBehaviour {
             return;
         }
 
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        body.velocity = new Vector2(transform.right.x, transform.right.y) * speed;
+
+        float zRotation = transform.rotation.z + angle;
+        Debug.Log("Angle is: " + angle);
+        Debug.Log("Local Z Rotation is: " + transform.rotation.z);
+        Debug.Log("New Z Roation is: " + zRotation);
+        angle += transform.rotation.z;
+        transform.eulerAngles = new Vector3(transform.localRotation.x, transform.localRotation.y, angle);
+        body.velocity = new Vector2(transform.right.x, transform.right.y) * 0;
 
 
         bouncesLeft--;
@@ -52,17 +62,27 @@ public class ArrowBounceTest : MonoBehaviour {
 
     void UpdateAngle()
     {
-        RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, gameObject.transform.right, 1000f, 1);
-        Vector2 firstVector = hit.point - Vector3toVector2(gameObject.transform.position);
+        origin = Vector3toVector2(gameObject.transform.position);
 
-        RaycastHit2D hit2 = Physics2D.Raycast(hit.point, hit.point.normalized, Mathf.Infinity, 1);
-        Vector2 origin = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
+        RaycastHit2D hit = Physics2D.Raycast(origin, gameObject.transform.right, 100f, 1);
+        Debug.DrawLine(origin, hit.point);
+
         Vector3 dirrection = (hit.point - origin).normalized;
-
         Vector3 reflectedVector = Vector3.Reflect(dirrection, hit.normal);
-        Vector2 secondVector = Vector3toVector2(reflectedVector);
 
-        angle = AngleBetweenVector2(firstVector, secondVector);
+        Debug.DrawRay(hit.point, reflectedVector * 10);
+
+        //Vector2 firstVector = hit.point - Vector3toVector2(origin);
+        //Vector2 secondVector = Vector3toVector2(reflectedVector);
+
+        Vector3 firstVector = Vector2toVector3(hit.point) - gameObject.transform.position;
+
+        //Debug.DrawRay(hit.point, Vector3toVector2(origin));
+
+        //angle = AngleBetweenVector2(firstVector, secondVector);
+        angle = AngleBetweenVector3(firstVector, reflectedVector);
+
+        //Debug.Log("Angle is: " + angle);
     }
 
     public void TurnOff()
@@ -112,27 +132,15 @@ public class ArrowBounceTest : MonoBehaviour {
         GameEventManager.GameReset -= GameReset;
     }
 
-    void DeflectDraw(RaycastHit2D hit)
+    void DeflectDraw()
     {
-        RaycastHit2D hit2 = Physics2D.Raycast(hit.point, hit.point.normalized, Mathf.Infinity, 1);
+        RaycastHit2D hit = Physics2D.Raycast(origin, gameObject.transform.right, 100f, 1);
+        Debug.DrawLine(origin, hit.point); 
 
-        Vector2 origin = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
         Vector3 dirrection = (hit.point - origin).normalized;
-
         Vector3 reflectedVector = Vector3.Reflect(dirrection, hit.normal);
 
-        //Debug.DrawLine(hit.point, reflectedVector * 1000);
-
-        Debug.DrawRay(hit.point, reflectedVector);
-
-        if (hit2)
-        {
-            
-        }
-        else
-        {
-            Debug.DrawLine(gameObject.transform.position, gameObject.transform.right * 1000);
-        }
+        Debug.DrawRay(hit.point, reflectedVector * 10);
     }
     
     private float AngleBetweenVector2(Vector2 vec1, Vector2 vec2)
@@ -142,9 +150,24 @@ public class ArrowBounceTest : MonoBehaviour {
         return Vector2.Angle(Vector2.right, diference) * sign;
     }
 
+    private float AngleBetweenVector3(Vector3 vec1, Vector3 vec2)
+    {
+        float angle = Vector3.Angle(vec1, vec2);
+        Vector3 cross = Vector3.Cross(vec1, vec2);
+        if (cross.z < 0)
+            angle = -angle;
+        return angle;
+    }
+
     private Vector2 Vector3toVector2(Vector3 vector)
     {
         Vector2 newVector = new Vector2(vector.x, vector.y);
+        return newVector;
+    }
+
+    private Vector3 Vector2toVector3(Vector2 vector)
+    {
+        Vector3 newVector = new Vector3(vector.x, vector.y, 0f);
         return newVector;
     }
 }
