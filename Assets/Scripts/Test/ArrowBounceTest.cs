@@ -1,8 +1,9 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-public class BallistaArrow : MonoBehaviour
-{
+public class ArrowBounceTest : MonoBehaviour {
+
     public float speed;
     public int bounces = 4;
 
@@ -34,11 +35,11 @@ public class BallistaArrow : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update () {
         timer += Time.deltaTime;
 
         RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, gameObject.transform.right, 0.5f, layerMask);
+        Debug.Log(!hit);
 
         if (!hit)
         {
@@ -148,14 +149,14 @@ public class BallistaArrow : MonoBehaviour
         //Debug.Log("Layer hit is: " + LayerMask.LayerToName(layerMask));
         Debug.Log("Collision Spot is: " + hit.point);
         Debug.Log("Object hit is: " + hit.transform.gameObject.name);
-        Debug.DrawLine(origin, hit.point);
+        Debug.DrawLine(origin, hit.point); 
 
         Vector3 dirrection = (hit.point - origin).normalized;
         Vector3 reflectedVector = Vector3.Reflect(dirrection, hit.normal);
 
         Debug.DrawRay(hit.point, reflectedVector * 10);
     }
-
+    
     private float AngleBetweenVector2(Vector2 vec1, Vector2 vec2)
     {
         Vector2 diference = vec2 - vec1;

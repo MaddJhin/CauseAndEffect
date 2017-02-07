@@ -25,7 +25,7 @@ public class Portal : MonoBehaviour {
         if(col.tag == "Bolt")
         {
             BallistaArrow bolt = col.GetComponent<BallistaArrow>();
-            bolt.NextDirection();
+            //bolt.NextDirection();
         }
     }
 }
