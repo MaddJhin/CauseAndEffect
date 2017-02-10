@@ -22,10 +22,10 @@ public class Portal : MonoBehaviour {
     void OnTriggerExit2D(Collider2D col)
     {
         is_exiting = false;
-        if(col.tag == "Bolt")
-        {
-            BallistaArrow bolt = col.GetComponent<BallistaArrow>();
-            //bolt.NextDirection();
-        }
+        //if(col.tag == "Bolt")
+        //{
+        //    BallistaArrow bolt = col.GetComponent<BallistaArrow>();
+        //    bolt.NextDirection();
+        //}
     }
 }

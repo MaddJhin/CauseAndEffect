@@ -9,7 +9,7 @@ public class InputManager : MonoBehaviour
     public GameObject currentObject;
 
     private PlacementArea[] placementAreas;
-    private float pressTime;
+    //private float pressTime;
 
     void Awake()
     {
@@ -39,7 +39,7 @@ public class InputManager : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            pressTime = Time.time;
+            //pressTime = Time.time;
 
             // First Shoot a ray
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -115,10 +115,10 @@ public class InputManager : MonoBehaviour
     //    placedObject.ObjectFlip();
     //}
 
-    void DragObject(RaycastHit2D hit)
-    {
-        SpriteDrag dragObject = hit.collider.gameObject.GetComponent<SpriteDrag>();
-    }
+    //void DragObject(RaycastHit2D hit)
+    //{
+    //    SpriteDrag dragObject = hit.collider.gameObject.GetComponent<SpriteDrag>();
+    //}
 
     void RemoveObject()
     {

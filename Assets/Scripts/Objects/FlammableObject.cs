@@ -79,7 +79,7 @@ public class FlammableObject : MonoBehaviour
     void StartFire(Collision2D col)
     {
         ContactPoint2D contact = col.contacts[0];
-        Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
+        //Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
         Vector3 pos = contact.point;
         ParticleSystem fire = Instantiate(flames, transform.position, Quaternion.identity);
         fire.transform.parent = gameObject.transform;

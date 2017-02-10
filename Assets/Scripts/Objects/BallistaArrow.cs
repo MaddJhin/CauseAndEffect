@@ -80,9 +80,9 @@ public class BallistaArrow : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(origin, gameObject.transform.right, 100f, layerMask);
         Debug.DrawLine(origin, hit.point);
 
-        Debug.Log("Collision Spot is: " + hit.point);
-        Debug.Log("Object hit is: " + hit.transform.gameObject.name);
-        Debug.DrawLine(origin, hit.point);
+        //Debug.Log("Collision Spot is: " + hit.point);
+        //Debug.Log("Object hit is: " + hit.transform.gameObject.name);
+        //Debug.DrawLine(origin, hit.point);
 
         Vector3 dirrection = (hit.point - origin).normalized;
         Vector3 reflectedVector = Vector3.Reflect(dirrection, hit.normal);
