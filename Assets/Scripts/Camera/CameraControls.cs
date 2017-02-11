@@ -33,12 +33,13 @@ public class CameraControls : MonoBehaviour
         targetOrtho = Camera.main.orthographicSize;
         cam = GetComponent<Camera>();
         manager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+        background = GameObject.FindGameObjectWithTag("Background").GetComponent<SpriteRenderer>();
     }
 
     void Update()
     {
         //Debug.Log(Camera.main.ViewportToWorldPoint(new Vector2(1,1)));
-        
+
 
         if (manager.dragging)
             return;
@@ -47,9 +48,19 @@ public class CameraControls : MonoBehaviour
         float clampX = ((background.bounds.size.x / 2) - (targetOrtho * cam.aspect) - 0.3f);
         //Debug.Log(clampY);
 
-        if (Input.GetMouseButton(0) )
+#if UNITY_EDITOR
+        if (Input.GetMouseButton(0))
         {
-            target += new Vector3(Input.GetAxisRaw("Mouse X") * Time.deltaTime * panSpeed * -1f, Input.GetAxisRaw("Mouse Y") * Time.deltaTime * panSpeed * -1f, 0f);    
+            target += new Vector3(Input.GetAxisRaw("Mouse X") * Time.deltaTime * panSpeed * -1f, Input.GetAxisRaw("Mouse Y") * Time.deltaTime * panSpeed * -1f, 0f);
+        }
+#endif
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
+        {
+            // Get movement of the finger since last frame
+            Vector2 touchDeltaPosition = Input.GetTouch(0).deltaPosition;
+
+            // Move object across XY plane
+            target += new Vector3(-touchDeltaPosition.x * panSpeed, -touchDeltaPosition.y * panSpeed, 0);
         }
 
         Vector3 targetPos = new Vector3(Mathf.Clamp(target.x, -clampX, clampX), Mathf.Clamp(target.y, clampY * -1, clampY), transform.position.z);
@@ -60,10 +71,11 @@ public class CameraControls : MonoBehaviour
             targetOrtho -= scroll * zoomSpeed;
             targetOrtho = Mathf.Clamp(targetOrtho, minOrtho, maxOrtho);
         }
-
+//#if UNITY_EDITOR
         transform.position = targetPos; // Vector3.MoveTowards(transform.position, targetPos, panSpeed * Time.deltaTime);
+//#endif
         Camera.main.orthographicSize = Mathf.MoveTowards(Camera.main.orthographicSize, targetOrtho, panSpeed * Time.deltaTime);
 
-    }
 
+    }
 }
