@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TouchCamera : MonoBehaviour {
 
+    public SpriteRenderer background;
+
     Vector2?[] oldTouchPositions = {
 		null,
 		null
@@ -11,14 +13,26 @@ public class TouchCamera : MonoBehaviour {
 	Vector2 oldTouchVector;
 	float oldTouchDistance;
     Camera cam;
+    private Vector3 target = Vector3.zero;
+    private float targetOrtho;
 
     void Awake()
     {
         cam = GetComponent<Camera>();
+        targetOrtho = Camera.main.orthographicSize;
+        background = GameObject.FindGameObjectWithTag("Background").GetComponent<SpriteRenderer>();
     }
 
-	void Update() {
-		if (Input.touchCount == 0) {
+    void Update() {
+
+        if (GameManager.instance.dragging == true)
+        {
+            oldTouchPositions[0] = null;
+            oldTouchPositions[1] = null;
+            return;
+        }
+
+        if (Input.touchCount == 0) {
 			oldTouchPositions[0] = null;
 			oldTouchPositions[1] = null;
 		}
@@ -30,9 +44,15 @@ public class TouchCamera : MonoBehaviour {
 			else {
 				Vector2 newTouchPosition = Input.GetTouch(0).position;
 				
-				transform.position += transform.TransformDirection((Vector3)((oldTouchPositions[0] - newTouchPosition) * cam.orthographicSize / cam.pixelHeight * 2f));
-				
-				oldTouchPositions[0] = newTouchPosition;
+				target += transform.TransformDirection((Vector3)((oldTouchPositions[0] - newTouchPosition) * cam.orthographicSize / cam.pixelHeight * 2f));
+
+                float clampY = ((background.bounds.size.y / 2) - targetOrtho - 0.3f);
+                float clampX = ((background.bounds.size.x / 2) - (targetOrtho * cam.aspect) - 0.3f);
+
+                Vector3 targetPos = new Vector3(Mathf.Clamp(target.x, -clampX, clampX), Mathf.Clamp(target.y, clampY * -1, clampY), transform.position.z);
+                transform.position = targetPos;
+
+                oldTouchPositions[0] = newTouchPosition;
 			}
 		}
 		else {
@@ -53,7 +73,7 @@ public class TouchCamera : MonoBehaviour {
 				float newTouchDistance = newTouchVector.magnitude;
 
 				transform.position += transform.TransformDirection((Vector3)((oldTouchPositions[0] + oldTouchPositions[1] - screen) * cam.orthographicSize / screen.y));
-				transform.localRotation *= Quaternion.Euler(new Vector3(0, 0, Mathf.Asin(Mathf.Clamp((oldTouchVector.y * newTouchVector.x - oldTouchVector.x * newTouchVector.y) / oldTouchDistance / newTouchDistance, -1f, 1f)) / 0.0174532924f));
+				//transform.localRotation *= Quaternion.Euler(new Vector3(0, 0, Mathf.Asin(Mathf.Clamp((oldTouchVector.y * newTouchVector.x - oldTouchVector.x * newTouchVector.y) / oldTouchDistance / newTouchDistance, -1f, 1f)) / 0.0174532924f));
 				cam.orthographicSize *= oldTouchDistance / newTouchDistance;
 				transform.position -= transform.TransformDirection((newTouchPositions[0] + newTouchPositions[1] - screen) * cam.orthographicSize / screen.y);
 
