@@ -18,7 +18,7 @@ public class Ballista : MonoBehaviour {
 
     private Vector3 arrowPos;
     private SpriteRenderer arrowSprite;
-    private bool changed;
+    private bool flipped = false;
     private float direction = 1;
 
     private float clickTime;
@@ -73,23 +73,25 @@ public class Ballista : MonoBehaviour {
     public void Flip()
     {
         Debug.Log("FLIPPED THE BITCH");
-        if (changed)
+        if (flipped)
         {
             direction *= -1;
             Debug.Log("Flip: " + gameObject.transform.position);
             //gameObject.transform.Rotate(0f,180,0f);
             transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
-            arrowPos = arrow.transform.position;
-            changed = false;
+            arrowPos = arrow.transform.localPosition;
+            arrow.Flip();
+            flipped = false;
         }
-        else if (!changed)
+        else if (!flipped)
         {
             direction *= -1;
             Debug.Log("Flip: " + gameObject.transform.position);
             //gameObject.transform.Rotate(0f,180,0f);
             transform.rotation = new Quaternion(0f, 180f, 0, 0);
-            arrowPos = arrow.transform.position;
-            changed = true;
+            //arrow.Flip();
+            arrowPos = arrow.transform.localPosition;
+            flipped = true;
         }
     }
 
@@ -97,7 +99,7 @@ public class Ballista : MonoBehaviour {
     {
         if (!arrow)
             return;
-        arrowPos = arrow.transform.position;
+        arrowPos = arrow.transform.localPosition;
         hasFired = false;
     }
 
@@ -106,7 +108,7 @@ public class Ballista : MonoBehaviour {
         hasFired = false;
         ballistaSprite.sprite = frame0;
 
-        arrow.transform.position = arrowPos;
+        arrow.transform.localPosition = arrowPos;
         arrowSprite.enabled = false;
         arrowSprite.flipX = false;
         arrowSprite.flipY = false;
