@@ -110,7 +110,5 @@ public class Ballista : MonoBehaviour {
 
         arrow.transform.localPosition = arrowPos;
         arrowSprite.enabled = false;
-        arrowSprite.flipX = false;
-        arrowSprite.flipY = false;
     }
 }

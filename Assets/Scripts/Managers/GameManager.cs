@@ -41,11 +41,6 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(this);
     }
 
-    void Start()
-    {
-        GameReset();
-    }
-
 #if old_way
     void Start()
     {

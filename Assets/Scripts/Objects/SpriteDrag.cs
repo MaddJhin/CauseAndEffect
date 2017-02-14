@@ -101,5 +101,10 @@ public class SpriteDrag : MonoBehaviour
         {
             trans.gameObject.layer = layerNumber;
         }
+
+        foreach (BallistaArrow arrow in GetComponentsInChildren<BallistaArrow>(true))
+        {
+            arrow.Flip();
+        }
     }
 }
