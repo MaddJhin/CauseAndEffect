@@ -27,6 +27,7 @@ public class CameraControls : MonoBehaviour
     private Camera cam;
     private GameManager manager;
     private Vector3 target;
+    private float clampX, clampY;
 
     void Start()
     {
@@ -44,8 +45,8 @@ public class CameraControls : MonoBehaviour
         if (manager.dragging)
             return;
 
-        float clampY = ((background.bounds.size.y / 2) - targetOrtho - 0.3f);
-        float clampX = ((background.bounds.size.x / 2) - (targetOrtho * cam.aspect) - 0.3f);
+        clampY = ((background.bounds.size.y / 2) - targetOrtho - 0.3f);
+        clampX = ((background.bounds.size.x / 2) - (targetOrtho * cam.aspect) - 0.3f);
         //Debug.Log(clampY);
 
 #if UNITY_EDITOR
@@ -53,15 +54,16 @@ public class CameraControls : MonoBehaviour
         {
             target += new Vector3(Input.GetAxisRaw("Mouse X") * Time.deltaTime * panSpeed * -1f, Input.GetAxisRaw("Mouse Y") * Time.deltaTime * panSpeed * -1f, 0f);
         }
-#endif
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
-        {
-            // Get movement of the finger since last frame
-            Vector2 touchDeltaPosition = Input.GetTouch(0).deltaPosition;
 
-            // Move object across XY plane
-            target += new Vector3(-touchDeltaPosition.x * panSpeed, -touchDeltaPosition.y * panSpeed, 0);
-        }
+        //if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
+        //{
+        //    // Get movement of the finger since last frame
+        //    Vector3 touchDeltaPosition = Input.GetTouch(0).position;
+
+        //    // Move object across XY plane
+        //    target += new Vector3(-touchDeltaPosition.x * panSpeed, -touchDeltaPosition.y * panSpeed, 0);
+        //}
+#endif
 
         Vector3 targetPos = new Vector3(Mathf.Clamp(target.x, -clampX, clampX), Mathf.Clamp(target.y, clampY * -1, clampY), transform.position.z);
 
@@ -71,11 +73,9 @@ public class CameraControls : MonoBehaviour
             targetOrtho -= scroll * zoomSpeed;
             targetOrtho = Mathf.Clamp(targetOrtho, minOrtho, maxOrtho);
         }
-//#if UNITY_EDITOR
-        transform.position = targetPos; // Vector3.MoveTowards(transform.position, targetPos, panSpeed * Time.deltaTime);
-//#endif
+
         Camera.main.orthographicSize = Mathf.MoveTowards(Camera.main.orthographicSize, targetOrtho, panSpeed * Time.deltaTime);
-
-
+        transform.position = targetPos; //Vector3.MoveTowards(transform.position, targetPos, panSpeed * Time.deltaTime);
+        
     }
 }

@@ -37,7 +37,7 @@ public class InputManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetMouseButtonDown(0))
         {
             //pressTime = Time.time;
 

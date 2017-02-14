@@ -117,6 +117,11 @@ public class ArrowBounceTest : MonoBehaviour {
     {
         startPosition = transform.position;
         startRotation = transform.rotation;
+
+        layerMask = (1 << 0)
+        | (1 << 9)
+        | (1 << 10)
+        | (1 << 12);
     }
 
     public void GameLaunch()
