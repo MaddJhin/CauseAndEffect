@@ -179,6 +179,11 @@ public class GameManager : MonoBehaviour
 
 #endif
 
+    private void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
+    {
+        inPlay = false;
+    }
+
     public void GameReset()
     {
         if (inPlay)
@@ -195,6 +200,16 @@ public class GameManager : MonoBehaviour
             inPlay = true;
             GameEventManager.TriggerGameLaunch();
         }
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnLevelFinishedLoading;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnLevelFinishedLoading;
     }
 
 }

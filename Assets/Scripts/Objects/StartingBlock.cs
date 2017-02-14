@@ -17,6 +17,14 @@ public class StartingBlock : MonoBehaviour {
         rBody = GetComponent<Rigidbody2D>();
     }
 
+    void Start()
+    {
+        if (startRight == true)
+            directionModifier = -1;
+        else
+            directionModifier = 1;
+    }
+
     //void Start()
     //{
     //    startRotation = transform.rotation;
@@ -33,14 +41,6 @@ public class StartingBlock : MonoBehaviour {
 
     void GameLaunch()
     {
-        if (startRight == true)
-        { 
-            directionModifier = -1;
-        }
-        else
-        {
-            directionModifier = 1;
-        }
         rBody.AddTorque(force * directionModifier);
     }
 
