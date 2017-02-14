@@ -40,7 +40,8 @@ public class CatapultBall : MonoBehaviour
     {
         body.velocity = Vector2.zero;
         body.angularVelocity = 0f;
-        transform.localPosition = ballPosition;
+        //transform.localPosition = ballPosition;
+        Destroy(gameObject);
     }
 
     void OnEnable()
