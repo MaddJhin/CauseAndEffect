@@ -15,7 +15,7 @@ public class SpriteDrag : MonoBehaviour
 
     void Update()
     {
-        if (is_beingDragged)
+        if (is_beingDragged && !GameManager.instance.inPlay)
         {
             Vector3 target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             transform.position = new Vector3(target.x + offsetX, target.y + offsetY, 0f);
