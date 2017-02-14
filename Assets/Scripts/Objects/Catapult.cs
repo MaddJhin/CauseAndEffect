@@ -3,7 +3,8 @@ using System.Collections;
 
 public class Catapult : MonoBehaviour {
 
-    public CatapultBall catapultBall;
+    public CatapultBall ball;
+    public Transform catapultBallSpawn;
     //public SpriteRenderer catapultImage;
     //public Sprite[] catapultAnimation = new Sprite[3];
     public Vector2 ballForce;
@@ -15,6 +16,7 @@ public class Catapult : MonoBehaviour {
     //private Vector3 ballPosition;
     private AudioSource source;
     private float clickTime;
+    private CatapultBall catapultBall;
 
     void Awake()
     {
@@ -90,6 +92,7 @@ public class Catapult : MonoBehaviour {
 
     public void GameLaunch()
     {
+        catapultBall = Instantiate(ball, catapultBallSpawn.position, Quaternion.identity);
         hasFired = false;
         changed = false;   
     }
