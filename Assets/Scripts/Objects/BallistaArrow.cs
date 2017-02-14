@@ -16,6 +16,7 @@ public class BallistaArrow : MonoBehaviour
     private Vector2 origin;
     private float timer;
     private LayerMask layerMask;
+    private float dirrection = 1f;
 
     void Awake()
     {
@@ -55,15 +56,15 @@ public class BallistaArrow : MonoBehaviour
             TurnOff();
             return;
         }
-        float debugFloat = (transform.localRotation.eulerAngles.z + angle);
+        float debugFloat = (transform.rotation.eulerAngles.z + angle);
         Debug.Log("Old Rotation is: " + debugFloat);
-        float zRotation = ClampRotation(transform.localRotation.eulerAngles.z + angle);
+        float zRotation = ClampRotation(transform.rotation.eulerAngles.z + (angle * dirrection));
         Debug.Log("New Z Roation is: " + zRotation);
 
         if (timer > 0.1f)
         {
-            transform.eulerAngles = new Vector3(transform.localRotation.eulerAngles.x,
-                                                transform.localRotation.eulerAngles.y,
+            transform.eulerAngles = new Vector3(transform.rotation.eulerAngles.x,
+                                                transform.rotation.eulerAngles.y,
                                                 zRotation);
             body.velocity = Vector2.zero;
             body.AddForce(transform.right * speed);
@@ -100,8 +101,8 @@ public class BallistaArrow : MonoBehaviour
         body.velocity = Vector2.zero;
         body.angularVelocity = 0f;
         col.enabled = false;
-        transform.localPosition = startPosition;
-        transform.localRotation = startRotation;
+        transform.position = startPosition;
+        transform.rotation = startRotation;
     }
 
     public void Shoot()
@@ -115,8 +116,8 @@ public class BallistaArrow : MonoBehaviour
 
     public void Flip()
     {
-        startPosition = transform.localPosition;
-        startRotation = transform.localRotation;
+        startPosition = transform.position;
+        startRotation = transform.rotation;
 
         foreach (Transform trans in GetComponentsInChildren<Transform>(true))
         {
@@ -126,8 +127,9 @@ public class BallistaArrow : MonoBehaviour
 
     public void GameLaunch()
     {
-        startPosition = transform.localPosition;
-        startRotation = transform.localRotation;
+        SetDirection();
+        startPosition = transform.position;
+        startRotation = transform.rotation;
     }
 
     public void GameReset()
@@ -200,5 +202,14 @@ public class BallistaArrow : MonoBehaviour
             return angle + 360;
         else
             return angle;
+    }
+
+    private void SetDirection()
+    {
+        Transform parent = GetComponentInParent<Ballista>().transform;
+        if (parent.localRotation.eulerAngles.y == 0)
+            dirrection = 1f;
+        else
+            dirrection = -1f;
     }
 }
