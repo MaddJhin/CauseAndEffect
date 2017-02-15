@@ -124,6 +124,7 @@
     <Compile Include="Assets\Scripts\UI\LevelSelectUI.cs" />
     <Compile Include="Assets\Scripts\UI\Menu.cs" />
     <Compile Include="Assets\Scripts\UI\MenuManager.cs" />
+    <Compile Include="Assets\Scripts\UI\MuteButton.cs" />
     <Compile Include="Assets\Scripts\UI\PinchZoom.cs" />
     <Compile Include="Assets\Scripts\UI\RichochetTest.cs" />
     <Compile Include="Assets\Scripts\UI\ScrollRectSnap.cs" />
