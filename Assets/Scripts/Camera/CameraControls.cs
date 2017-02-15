@@ -37,6 +37,8 @@ public class CameraControls : MonoBehaviour
         background = GameObject.FindGameObjectWithTag("Background").GetComponent<SpriteRenderer>();
     }
 
+#if UNITY_EDITOR
+
     void Update()
     {
         //Debug.Log(Camera.main.ViewportToWorldPoint(new Vector2(1,1)));
@@ -49,7 +51,7 @@ public class CameraControls : MonoBehaviour
         clampX = ((background.bounds.size.x / 2) - (targetOrtho * cam.aspect) - 0.3f);
         //Debug.Log(clampY);
 
-#if UNITY_EDITOR
+
         if (Input.GetMouseButton(0))
         {
             target += new Vector3(Input.GetAxisRaw("Mouse X") * Time.deltaTime * panSpeed * -1f, Input.GetAxisRaw("Mouse Y") * Time.deltaTime * panSpeed * -1f, 0f);
@@ -63,7 +65,7 @@ public class CameraControls : MonoBehaviour
         //    // Move object across XY plane
         //    target += new Vector3(-touchDeltaPosition.x * panSpeed, -touchDeltaPosition.y * panSpeed, 0);
         //}
-#endif
+
 
         Vector3 targetPos = new Vector3(Mathf.Clamp(target.x, -clampX, clampX), Mathf.Clamp(target.y, clampY * -1, clampY), transform.position.z);
 
@@ -75,7 +77,9 @@ public class CameraControls : MonoBehaviour
         }
 
         Camera.main.orthographicSize = Mathf.MoveTowards(Camera.main.orthographicSize, targetOrtho, panSpeed * Time.deltaTime);
-        transform.position = targetPos; //Vector3.MoveTowards(transform.position, targetPos, panSpeed * Time.deltaTime);
-        
+        transform.position = targetPos; //Vector3.MoveTowards(transform.position, targetPos, panSpeed * Time.deltaTime);   
     }
+
+#endif
+
 }
