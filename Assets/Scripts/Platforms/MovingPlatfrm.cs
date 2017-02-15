@@ -149,6 +149,7 @@ public class MovingPlatfrm : MonoBehaviour
         platform.position = positions[0].transform.position;
         destination = 1;
         SetDestination(destination);
+        reachedEnd = false;
     }
 
     void OnEnable ()
