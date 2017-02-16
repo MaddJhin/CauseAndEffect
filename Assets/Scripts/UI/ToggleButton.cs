@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class ToggleButton : MonoBehaviour {
 
-    public Button[] myButtons;
-
     private Button currentButton;
 
     public void BeenClicked(Button newButton)
