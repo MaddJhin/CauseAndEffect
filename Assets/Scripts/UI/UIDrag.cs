@@ -5,6 +5,7 @@ using UnityEngine;
 public class UIDrag : MonoBehaviour {
 
     public GameObject prefab;
+    public UIManager UIManager;
 
     private Vector3 startPos;
 
@@ -53,6 +54,6 @@ public class UIDrag : MonoBehaviour {
 
         InputManager.instance.HideHighlights();
         GameManager.instance.dragging = false;
-
+        UIManager.BeenClicked(null);
     }
 }
