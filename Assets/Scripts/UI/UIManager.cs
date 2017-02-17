@@ -8,7 +8,7 @@ public class UIManager : MonoBehaviour {
     public GameObject pausePanel;
 
     private AudioSource uiAudioSource;
-
+    private Button currentButton;
 
     void Awake()
     {
@@ -57,6 +57,7 @@ public class UIManager : MonoBehaviour {
     {
         uiAudioSource.clip = launchClip;
         uiAudioSource.Play();
+        BeenClicked(null);
     }
 
     public void ChangeCurrentObject(GameObject newObject)
@@ -106,5 +107,16 @@ public class UIManager : MonoBehaviour {
         {
             InputManager.instance.ShowHighlights("Block");
         }
+    }
+
+    public void BeenClicked(Button newButton)
+    {
+        if (currentButton != null)
+            currentButton.image.color = Color.white;
+        
+        if(newButton != null)
+            newButton.image.color = Color.black;
+
+        currentButton = newButton;
     }
 }
