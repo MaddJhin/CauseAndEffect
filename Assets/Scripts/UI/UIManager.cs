@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour {
 
-    public AudioClip pauseClip, launchClip;
+    public AudioClip pauseClip, launchClip, winClip;
     public GameObject pausePanel;
 
     private AudioSource uiAudioSource;
@@ -60,6 +60,12 @@ public class UIManager : MonoBehaviour {
         BeenClicked(null);
     }
 
+    void LevelComplete()
+    {
+        uiAudioSource.clip = winClip;
+        uiAudioSource.Play();
+    }
+
     public void ChangeCurrentObject(GameObject newObject)
     {
         InputManager.instance.currentObject = newObject;
@@ -71,12 +77,14 @@ public class UIManager : MonoBehaviour {
     {
         GameEventManager.GameLaunch += GameLaunch;
         GameEventManager.GameReset += GameReset;
+        GameEventManager.LevelComplete += LevelComplete;
     }
 
     void OnDisable()
     {
         GameEventManager.GameLaunch -= GameLaunch;
         GameEventManager.GameReset -= GameReset;
+        GameEventManager.LevelComplete -= LevelComplete;
     }
 
     public void Pause ()

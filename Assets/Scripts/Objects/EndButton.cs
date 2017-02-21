@@ -6,12 +6,12 @@ public class EndButton : MonoBehaviour {
 
     private int amountHit = 0;
 
-    private AudioSource hitSound;
+    private AudioSource audio;
     //private UIManager guiManager;
 
     void Awake()
     {
-        hitSound = GetComponent<AudioSource>();
+        audio = GetComponent<AudioSource>();
     }
 
     void OnCollisionEnter2D(Collision2D collider)
@@ -21,7 +21,7 @@ public class EndButton : MonoBehaviour {
             collider.gameObject.tag == "Bolt" ||
             collider.gameObject.tag == "TriggerObject")
         {
-            hitSound.Play();
+            audio.Play();
             DumpThing(collider.gameObject);
             amountHit++;
             if (amountHit == timesHit)
