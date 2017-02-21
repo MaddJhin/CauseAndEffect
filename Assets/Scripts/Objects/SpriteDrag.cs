@@ -93,6 +93,8 @@ public class SpriteDrag : MonoBehaviour
 
         InputManager.instance.HideHighlights();
         GameManager.instance.dragging = false;
+        UIManager uiManager = GameObject.FindGameObjectWithTag("Canvas").GetComponent<UIManager>();
+        uiManager.BeenClicked(null);
     }
 
     public void SetLayerRecursively(int layerNumber)
