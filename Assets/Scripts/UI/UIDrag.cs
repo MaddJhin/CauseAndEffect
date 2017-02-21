@@ -8,6 +8,12 @@ public class UIDrag : MonoBehaviour {
     public UIManager UIManager;
 
     private Vector3 startPos;
+    private AudioSource audio;
+
+    void Awake()
+    {
+        audio = GetComponent<AudioSource>();
+    }
 
     void Start()
     {
@@ -56,4 +62,10 @@ public class UIDrag : MonoBehaviour {
         GameManager.instance.dragging = false;
         UIManager.BeenClicked(null);
     }
+
+    void OnMouseDown()
+    {
+        audio.Play();
+    }
+
 }
