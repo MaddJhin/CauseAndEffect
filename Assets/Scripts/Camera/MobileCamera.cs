@@ -64,7 +64,6 @@ public class MobileCamera : MonoBehaviour
             //float speed = touchDeltaPosition.magnitude / Time.deltaTime;
 
             // Move object across XY plane
-            //transform.Translate(-touchDeltaPosition.x * Time.deltaTime * speed, -touchDeltaPosition.y * Time.deltaTime * speed, 0);
             ClampMove(touchDeltaPosition);
 
             //transform.position += transform.TransformDirection((Vector3)
@@ -110,9 +109,8 @@ public class MobileCamera : MonoBehaviour
 
     void ClampMove(Vector2 moveDelta)
     {
-
-        float xMove = Mathf.Clamp(-moveDelta.x * Time.deltaTime * speed, clampX, -clampX);
-        float yMove = Mathf.Clamp(-moveDelta.y * Time.deltaTime * speed, clampY, -clampY);
+        float xMove = Mathf.Clamp(-moveDelta.x * Time.deltaTime * speed, -clampX, clampX);
+        float yMove = Mathf.Clamp(-moveDelta.y * Time.deltaTime * speed, -clampY, clampY);
 
         transform.Translate(xMove, yMove, 0);
     }
