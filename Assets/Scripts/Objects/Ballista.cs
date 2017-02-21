@@ -20,12 +20,12 @@ public class Ballista : MonoBehaviour {
     private SpriteRenderer arrowSprite;
     private bool flipped = false;
     private float direction = 1;
-
+    private AudioSource audio;
     private float clickTime;
 
     void Awake()
     {
-
+        audio = GetComponent<AudioSource>();
 #if bounceTest
         arrow = GetComponentInChildren<ArrowBounceTest>();
 #elif (!bounceTest)
@@ -64,6 +64,7 @@ public class Ballista : MonoBehaviour {
     {
         if(!hasFired)
         {
+            audio.Play();
             hasFired = true;
             arrow.Shoot();
             ballistaSprite.sprite = frame1;

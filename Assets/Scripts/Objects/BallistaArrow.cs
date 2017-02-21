@@ -17,9 +17,11 @@ public class BallistaArrow : MonoBehaviour
     private float timer;
     private LayerMask layerMask;
     private float dirrection = 1f;
+    private AudioSource audio;
 
     void Awake()
     {
+        audio = GetComponent<AudioSource>();
         body = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
         col = GetComponent<PolygonCollider2D>();
@@ -63,6 +65,7 @@ public class BallistaArrow : MonoBehaviour
 
         if (timer > 0.1f)
         {
+            audio.Play();
             transform.eulerAngles = new Vector3(transform.rotation.eulerAngles.x,
                                                 transform.rotation.eulerAngles.y,
                                                 zRotation);
