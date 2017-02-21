@@ -7,6 +7,7 @@ public class MobileCamera : MonoBehaviour
     public SpriteRenderer background;
     public int width, height;
     public float speed;
+    public float maxOrtho = 12.5f;
 
     private Camera cam;
     private Vector2 currentTouchVector;
@@ -57,7 +58,7 @@ public class MobileCamera : MonoBehaviour
             //else
             //{
             // Detect Current Position
-            Vector2 currentTouchPosition = Input.GetTouch(0).position;
+            //Vector2 currentTouchPosition = Input.GetTouch(0).position;
 
             // Get the delta position
             Vector2 touchDeltaPosition = Input.GetTouch(0).deltaPosition;
@@ -99,6 +100,7 @@ public class MobileCamera : MonoBehaviour
             float newTouchDistance = newTouchVector.magnitude;
 
             cam.orthographicSize *= currentTouchDistance / newTouchDistance;
+            cam.orthographicSize = Mathf.Clamp(cam.orthographicSize, 3f, maxOrtho);
 
             touchPositions[0] = newTouchPositions[0];
             touchPositions[1] = newTouchPositions[1];
@@ -109,10 +111,13 @@ public class MobileCamera : MonoBehaviour
 
     void ClampMove(Vector2 moveDelta)
     {
-        float xMove = Mathf.Clamp(-moveDelta.x * Time.deltaTime * speed, -clampX, clampX);
-        float yMove = Mathf.Clamp(-moveDelta.y * Time.deltaTime * speed, -clampY, clampY);
+        transform.Translate(-moveDelta.x * Time.deltaTime * speed, 
+                            -moveDelta.y * Time.deltaTime * speed, 
+                            0);
 
-        transform.Translate(xMove, yMove, 0);
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x, -clampX, clampX), 
+                                         Mathf.Clamp(transform.position.y, -clampY, clampY), 
+                                         transform.position.z);
     }
 
     void UpdateClampValues()
