@@ -21,11 +21,11 @@ public class EndButton : MonoBehaviour {
             collider.gameObject.tag == "Bolt" ||
             collider.gameObject.tag == "TriggerObject")
         {
+            hitSound.Play();
             DumpThing(collider.gameObject);
             amountHit++;
             if (amountHit == timesHit)
             {
-                hitSound.Play();
                 GameEventManager.TriggerLevelComplete();
             }
         }
