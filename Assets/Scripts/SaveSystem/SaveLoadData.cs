@@ -16,32 +16,18 @@ using System.Collections;
 public class SaveLoadData
 {
     // An assortment of sample data types.
-    public string   m_sceneName;
-    public string   m_timeDate;
-    public string   m_description;
-    public int      m_sampleInt;
-    public float    m_sampleFloat;
-    public bool     m_isBlank;
-
+    public string   levelName;
+    public bool     m_unlocked;
+    public bool m_star1;
+    public bool m_star2;
+    public bool m_star3;
+    
     // Default values for the save slot
     public SaveLoadData()
     {
         // This scene to load
-        this.m_sceneName = "";
+        this.levelName = "";
 
-        // Sample String
-        this.m_timeDate = "";
-
-        // Sample String
-        this.m_description = "";
-
-        // Sample Int
-        this.m_sampleInt = 0;
-
-        // Sample Float
-        this.m_sampleFloat = 0.0f;
-
-        // Just a sample bool
-        this.m_isBlank = true;
+        m_unlocked = m_star1 = m_star2 = m_star3 = false;
     }
 }

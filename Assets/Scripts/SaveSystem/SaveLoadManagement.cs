@@ -19,7 +19,8 @@ public class SaveLoadManagement
 
     // Consider these data slots. 
     // You can have as many as you want, just don't turn this into an array or it will break things.
-    public SaveLoadData m_data0, m_data1, m_data2, m_data3;
+    public SaveLoadData level_001, level_002, level_003, level_004, level_005, level_006, level_007, level_008, level_009, level_010, level_011, level_012, level_013, level_014, level_015,
+        level_016, level_017, level_018, level_019, level_020, level_021, level_022, level_023, level_024, level_025, level_026, level_027, level_028, level_029, level_030;
 
     // Consider this the data slot for user settings
     // You can have as many of these as you like if you want to save different settings for different users.
@@ -33,10 +34,38 @@ public class SaveLoadManagement
     // Assigning each data slot with information if it exists.
     public SaveLoadManagement()
     {
-        // Slots 1-3
-        m_data0 = new SaveLoadData();
-        m_data1 = new SaveLoadData();
-        m_data2 = new SaveLoadData();
+
+        level_001 = new SaveLoadData();
+        level_002 = new SaveLoadData();
+        level_003 = new SaveLoadData();
+        level_004 = new SaveLoadData();
+        level_005 = new SaveLoadData();
+        level_006 = new SaveLoadData();
+        level_007 = new SaveLoadData();
+        level_008 = new SaveLoadData();
+        level_009 = new SaveLoadData();
+        level_010 = new SaveLoadData();
+        level_011 = new SaveLoadData();
+        level_012 = new SaveLoadData();
+        level_013 = new SaveLoadData();
+        level_014 = new SaveLoadData();
+        level_015 = new SaveLoadData();
+        level_016 = new SaveLoadData();
+        level_017 = new SaveLoadData();
+        level_018 = new SaveLoadData();
+        level_019 = new SaveLoadData();
+        level_020 = new SaveLoadData();
+        level_021 = new SaveLoadData();
+        level_022 = new SaveLoadData();
+        level_023 = new SaveLoadData();
+        level_024 = new SaveLoadData();
+        level_025 = new SaveLoadData();
+        level_026 = new SaveLoadData();
+        level_027 = new SaveLoadData();
+        level_028 = new SaveLoadData();
+        level_029 = new SaveLoadData();
+        level_030 = new SaveLoadData();
+
 
         // Game Settings slot.
         m_settingsData = new SaveLoadSettings();

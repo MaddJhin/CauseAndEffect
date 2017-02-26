@@ -73,6 +73,18 @@
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
+    <Reference Include="Mono.Cecil">
+      <HintPath>Library\UnityAssemblies\Mono.Cecil.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
+      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
+      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Common">
+      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Common.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="CauseAndEffect2.0.Plugins.csproj">
@@ -91,6 +103,7 @@
     <Compile Include="Assets\Scripts\Managers\GameSoundScript.cs" />
     <Compile Include="Assets\Scripts\Managers\InputManager.cs" />
     <Compile Include="Assets\Scripts\Managers\SoundScript.cs" />
+    <Compile Include="Assets\Scripts\Managers\StarManager.cs" />
     <Compile Include="Assets\Scripts\Objects\Ballista.cs" />
     <Compile Include="Assets\Scripts\Objects\BallistaArrow.cs" />
     <Compile Include="Assets\Scripts\Objects\BallistaTrigger.cs" />
@@ -115,10 +128,14 @@
     <Compile Include="Assets\Scripts\Platforms\MovingPlatfrm.cs" />
     <Compile Include="Assets\Scripts\Platforms\PlacementArea.cs" />
     <Compile Include="Assets\Scripts\Platforms\PlatformTrigger.cs" />
+    <Compile Include="Assets\Scripts\SaveSystem\LevelSelectButton.cs" />
+    <Compile Include="Assets\Scripts\SaveSystem\LevelSelectStar.cs" />
+    <Compile Include="Assets\Scripts\SaveSystem\LevelSelectUnlock.cs" />
     <Compile Include="Assets\Scripts\SaveSystem\SaveLoad.cs" />
     <Compile Include="Assets\Scripts\SaveSystem\SaveLoadData.cs" />
     <Compile Include="Assets\Scripts\SaveSystem\SaveLoadManagement.cs" />
     <Compile Include="Assets\Scripts\SaveSystem\SaveLoadSettings.cs" />
+    <Compile Include="Assets\Scripts\SaveSystem\SaveSwitch.cs" />
     <Compile Include="Assets\Scripts\Test\ArrowBounceTest.cs" />
     <Compile Include="Assets\Scripts\Test\BlockNew.cs" />
     <Compile Include="Assets\Scripts\Test\BlockSpawn.cs" />

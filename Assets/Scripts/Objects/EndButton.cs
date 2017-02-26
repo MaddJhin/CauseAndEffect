@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EndButton : MonoBehaviour {
 
@@ -26,6 +27,9 @@ public class EndButton : MonoBehaviour {
             amountHit++;
             if (amountHit == timesHit)
             {
+                string levelName = SceneManager.GetActiveScene().name;
+                SaveSwitch.UpdateStars(levelName, 0);
+                Debug.Log("Level name passed: " + levelName);
                 GameEventManager.TriggerLevelComplete();
             }
         }
