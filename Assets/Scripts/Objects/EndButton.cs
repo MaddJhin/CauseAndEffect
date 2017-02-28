@@ -28,7 +28,7 @@ public class EndButton : MonoBehaviour {
             if (amountHit == timesHit)
             {
                 string levelName = SceneManager.GetActiveScene().name;
-                //SaveSwitch.UpdateStars(levelName, 0);
+                SaveSwitch.UpdateStars(levelName, 0);
                 Debug.Log("Level name passed: " + levelName);
                 GameEventManager.TriggerLevelComplete();
             }

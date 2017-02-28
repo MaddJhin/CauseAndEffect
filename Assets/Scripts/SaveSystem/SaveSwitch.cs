@@ -8,8 +8,8 @@ public static class SaveSwitch
     public static void UpdateStars(string levelName, int starIndex)
     {
 
-        //if (SaveLoadManagement.m_current == null)
-        //    SaveLoadManagement.m_current = new SaveLoadManagement();
+        if (SaveLoadManagement.m_current == null)
+            SaveLoadManagement.m_current = new SaveLoadManagement();
 
         switch (levelName)
         {
