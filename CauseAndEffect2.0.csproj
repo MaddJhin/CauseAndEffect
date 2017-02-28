@@ -131,6 +131,7 @@
     <Compile Include="Assets\Scripts\SaveSystem\LevelSelectButton.cs" />
     <Compile Include="Assets\Scripts\SaveSystem\LevelSelectStar.cs" />
     <Compile Include="Assets\Scripts\SaveSystem\LevelSelectUnlock.cs" />
+    <Compile Include="Assets\Scripts\SaveSystem\MainMenuLoad.cs" />
     <Compile Include="Assets\Scripts\SaveSystem\SaveLoad.cs" />
     <Compile Include="Assets\Scripts\SaveSystem\SaveLoadData.cs" />
     <Compile Include="Assets\Scripts\SaveSystem\SaveLoadManagement.cs" />

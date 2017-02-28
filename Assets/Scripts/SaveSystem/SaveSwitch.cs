@@ -7,6 +7,8 @@ public static class SaveSwitch
     
     public static void UpdateStars(string levelName, int starIndex)
     {
+        SaveLoad.Load();
+
         if (SaveLoadManagement.m_current == null)
             SaveLoadManagement.m_current = new SaveLoadManagement();
 
@@ -286,5 +288,7 @@ public static class SaveSwitch
                 Debug.Log("Wrong Case, No star updated");
                 break;
         }
+
+        SaveLoad.Save();
     }
 }
