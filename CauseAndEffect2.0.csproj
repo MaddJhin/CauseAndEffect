@@ -128,10 +128,12 @@
     <Compile Include="Assets\Scripts\Test\ArrowBounceTest.cs" />
     <Compile Include="Assets\Scripts\Test\BlockNew.cs" />
     <Compile Include="Assets\Scripts\Test\BlockSpawn.cs" />
+    <Compile Include="Assets\Scripts\Test\ButtonOneLoadTest.cs" />
     <Compile Include="Assets\Scripts\Test\DebugRay.cs" />
     <Compile Include="Assets\Scripts\Test\DragMe.cs" />
     <Compile Include="Assets\Scripts\Test\DragPanel.cs" />
     <Compile Include="Assets\Scripts\Test\DropMe.cs" />
+    <Compile Include="Assets\Scripts\Test\LevelOneSaveTest.cs" />
     <Compile Include="Assets\Scripts\UI\LevelSelectUI.cs" />
     <Compile Include="Assets\Scripts\UI\Menu.cs" />
     <Compile Include="Assets\Scripts\UI\MenuManager.cs" />

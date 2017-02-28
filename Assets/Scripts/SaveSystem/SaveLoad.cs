@@ -28,6 +28,7 @@ public static class SaveLoad
         FileStream file = File.Create(Application.persistentDataPath + "/Francisco.InABox");
         bf.Serialize(file, SaveLoad.m_savedGames);
         file.Close();
+        Debug.Log("Data Saved");
     }
 
     // This is where loading data happens.

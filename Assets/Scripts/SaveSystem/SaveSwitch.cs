@@ -7,10 +7,9 @@ public static class SaveSwitch
     
     public static void UpdateStars(string levelName, int starIndex)
     {
-        SaveLoad.Load();
 
-        if (SaveLoadManagement.m_current == null)
-            SaveLoadManagement.m_current = new SaveLoadManagement();
+        //if (SaveLoadManagement.m_current == null)
+        //    SaveLoadManagement.m_current = new SaveLoadManagement();
 
         switch (levelName)
         {
@@ -290,5 +289,6 @@ public static class SaveSwitch
         }
 
         SaveLoad.Save();
+        Debug.Log("Save Switch has Saved");
     }
 }

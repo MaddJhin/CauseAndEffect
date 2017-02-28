@@ -14,9 +14,13 @@ public class LevelSelectUnlock : MonoBehaviour {
 
     void SetButtons()
     {
-        if (SaveLoadManagement.m_current == null)
-            SaveLoadManagement.m_current = new SaveLoadManagement();
+        //if (SaveLoadManagement.m_current == null)
+        //    SaveLoadManagement.m_current = new SaveLoadManagement();
 
+        SaveLoad.Load();
+
+        Debug.Log("m_current is null is: " + SaveLoadManagement.m_current == null);
+        Debug.Log(SaveLoadManagement.m_current.level_001 == null);
         foreach (LevelSelectButton button in levelButtons)
         {
             string buttonName = button.name;
@@ -24,8 +28,8 @@ public class LevelSelectUnlock : MonoBehaviour {
             switch (buttonName)
             {
                 case "Level_001":
-                    SaveLoadManagement.m_current.level_001.m_unlocked = true;
-                    button.unlocked = SaveLoadManagement.m_current.level_001.m_unlocked;
+//                    SaveLoadManagement.m_current.level_001.m_unlocked = true;
+                    //button.unlocked = SaveLoadManagement.m_current.level_001.m_unlocked;
                     button.Star_One = SaveLoadManagement.m_current.level_001.m_star1;
                     button.Star_Two = SaveLoadManagement.m_current.level_001.m_star2;
                     button.Star_Three = SaveLoadManagement.m_current.level_001.m_star3;
@@ -60,103 +64,103 @@ public class LevelSelectUnlock : MonoBehaviour {
                     button.Star_Two = SaveLoadManagement.m_current.level_006.m_star2;
                     button.Star_Three = SaveLoadManagement.m_current.level_006.m_star3;
                     break;
-                case "level_007":
+                case "Level_007":
                     button.unlocked = SaveLoadManagement.m_current.level_007.m_unlocked;
                     button.Star_One = SaveLoadManagement.m_current.level_007.m_star1;
                     button.Star_Two = SaveLoadManagement.m_current.level_007.m_star2;
                     button.Star_Three = SaveLoadManagement.m_current.level_007.m_star3;
                     break;
-                case "level_008":
+                case "Level_008":
                     button.unlocked = SaveLoadManagement.m_current.level_008.m_unlocked;
                     button.Star_One = SaveLoadManagement.m_current.level_008.m_star1;
                     button.Star_Two = SaveLoadManagement.m_current.level_008.m_star2;
                     button.Star_Three = SaveLoadManagement.m_current.level_008.m_star3;
                     break;
-                case "level_009":
+                case "Level_009":
                     button.unlocked = SaveLoadManagement.m_current.level_008.m_unlocked;
                     button.Star_One = SaveLoadManagement.m_current.level_008.m_star1;
                     button.Star_Two = SaveLoadManagement.m_current.level_008.m_star2;
                     button.Star_Three = SaveLoadManagement.m_current.level_008.m_star3;
                     break;
-                case "level_010":
+                case "Level_010":
                     button.unlocked = SaveLoadManagement.m_current.level_009.m_unlocked;
                     button.Star_One = SaveLoadManagement.m_current.level_009.m_star1;
                     button.Star_Two = SaveLoadManagement.m_current.level_009.m_star2;
                     button.Star_Three = SaveLoadManagement.m_current.level_009.m_star3;
                     break;
-                case "level_011":
+                case "Level_011":
                     button.unlocked = SaveLoadManagement.m_current.level_010.m_unlocked;
                     button.Star_One = SaveLoadManagement.m_current.level_010.m_star1;
                     button.Star_Two = SaveLoadManagement.m_current.level_010.m_star2;
                     button.Star_Three = SaveLoadManagement.m_current.level_010.m_star3;
                     break;
-                case "level_012":
+                case "Level_012":
                     button.unlocked = SaveLoadManagement.m_current.level_011.m_unlocked;
                     button.Star_One = SaveLoadManagement.m_current.level_011.m_star1;
                     button.Star_Two = SaveLoadManagement.m_current.level_011.m_star2;
                     button.Star_Three = SaveLoadManagement.m_current.level_011.m_star3;
                     break;
-                case "level_013":
+                case "Level_013":
                     button.unlocked = SaveLoadManagement.m_current.level_013.m_unlocked;
                     button.Star_One = SaveLoadManagement.m_current.level_013.m_star1;
                     button.Star_Two = SaveLoadManagement.m_current.level_013.m_star2;
                     button.Star_Three = SaveLoadManagement.m_current.level_013.m_star3;
                     break;
-                case "level_014":
+                case "Level_014":
                     button.unlocked = SaveLoadManagement.m_current.level_014.m_unlocked;
                     button.Star_One = SaveLoadManagement.m_current.level_014.m_star1;
                     button.Star_Two = SaveLoadManagement.m_current.level_014.m_star2;
                     button.Star_Three = SaveLoadManagement.m_current.level_014.m_star3;
                     break;
-                case "level_015":
+                case "Level_015":
                     button.unlocked = SaveLoadManagement.m_current.level_015.m_unlocked;
                     button.Star_One = SaveLoadManagement.m_current.level_015.m_star1;
                     button.Star_Two = SaveLoadManagement.m_current.level_015.m_star2;
                     button.Star_Three = SaveLoadManagement.m_current.level_015.m_star3;
                     break;
-                case "level_016":
+                case "Level_016":
                     button.unlocked = SaveLoadManagement.m_current.level_016.m_unlocked;
                     button.Star_One = SaveLoadManagement.m_current.level_016.m_star1;
                     button.Star_Two = SaveLoadManagement.m_current.level_016.m_star2;
                     button.Star_Three = SaveLoadManagement.m_current.level_016.m_star3;
                     break;
-                case "level_017":
+                case "Level_017":
                     button.unlocked = SaveLoadManagement.m_current.level_017.m_unlocked;
                     button.Star_One = SaveLoadManagement.m_current.level_017.m_star1;
                     button.Star_Two = SaveLoadManagement.m_current.level_017.m_star2;
                     button.Star_Three = SaveLoadManagement.m_current.level_017.m_star3;
                     break;
-                case "level_018":
+                case "Level_018":
                     button.unlocked = SaveLoadManagement.m_current.level_018.m_unlocked;
                     button.Star_One = SaveLoadManagement.m_current.level_018.m_star1;
                     button.Star_Two = SaveLoadManagement.m_current.level_018.m_star2;
                     button.Star_Three = SaveLoadManagement.m_current.level_018.m_star3;
                     break;
-                case "level_019":
+                case "Level_019":
                     button.unlocked = SaveLoadManagement.m_current.level_019.m_unlocked;
                     button.Star_One = SaveLoadManagement.m_current.level_019.m_star1;
                     button.Star_Two = SaveLoadManagement.m_current.level_019.m_star2;
                     button.Star_Three = SaveLoadManagement.m_current.level_019.m_star3;
                     break;
-                case "level_020":
+                case "Level_020":
                     button.unlocked = SaveLoadManagement.m_current.level_020.m_unlocked;
                     button.Star_One = SaveLoadManagement.m_current.level_020.m_star1;
                     button.Star_Two = SaveLoadManagement.m_current.level_020.m_star2;
                     button.Star_Three = SaveLoadManagement.m_current.level_020.m_star3;
                     break;
-                case "level_021":
+                case "Level_021":
                     button.unlocked = SaveLoadManagement.m_current.level_021.m_unlocked;
                     button.Star_One = SaveLoadManagement.m_current.level_021.m_star1;
                     button.Star_Two = SaveLoadManagement.m_current.level_021.m_star2;
                     button.Star_Three = SaveLoadManagement.m_current.level_021.m_star3;
                     break;
-                case "level_022":
+                case "Level_022":
                     button.unlocked = SaveLoadManagement.m_current.level_022.m_unlocked;
                     button.Star_One = SaveLoadManagement.m_current.level_022.m_star1;
                     button.Star_Two = SaveLoadManagement.m_current.level_022.m_star2;
                     button.Star_Three = SaveLoadManagement.m_current.level_022.m_star3;
                     break;
-                case "level_023":
+                case "Level_023":
                     button.unlocked = SaveLoadManagement.m_current.level_023.m_unlocked;
                     button.Star_One = SaveLoadManagement.m_current.level_023.m_star1;
                     button.Star_Two = SaveLoadManagement.m_current.level_023.m_star2;
@@ -174,31 +178,31 @@ public class LevelSelectUnlock : MonoBehaviour {
                     button.Star_Two = SaveLoadManagement.m_current.level_025.m_star2;
                     button.Star_Three = SaveLoadManagement.m_current.level_025.m_star3;
                     break;
-                case "level_026":
+                case "Level_026":
                     button.unlocked = SaveLoadManagement.m_current.level_026.m_unlocked;
                     button.Star_One = SaveLoadManagement.m_current.level_026.m_star1;
                     button.Star_Two = SaveLoadManagement.m_current.level_026.m_star2;
                     button.Star_Three = SaveLoadManagement.m_current.level_026.m_star3;
                     break;
-                case "level_027":
+                case "Level_027":
                     button.unlocked = SaveLoadManagement.m_current.level_027.m_unlocked;
                     button.Star_One = SaveLoadManagement.m_current.level_027.m_star1;
                     button.Star_Two = SaveLoadManagement.m_current.level_027.m_star2;
                     button.Star_Three = SaveLoadManagement.m_current.level_027.m_star3;
                     break;
-                case "level_028":
+                case "Level_028":
                     button.unlocked = SaveLoadManagement.m_current.level_028.m_unlocked;
                     button.Star_One = SaveLoadManagement.m_current.level_028.m_star1;
                     button.Star_Two = SaveLoadManagement.m_current.level_028.m_star2;
                     button.Star_Three = SaveLoadManagement.m_current.level_028.m_star3;
                     break;
-                case "level_029":
+                case "Level_029":
                     button.unlocked = SaveLoadManagement.m_current.level_029.m_unlocked;
                     button.Star_One = SaveLoadManagement.m_current.level_029.m_star1;
                     button.Star_Two = SaveLoadManagement.m_current.level_029.m_star2;
                     button.Star_Three = SaveLoadManagement.m_current.level_029.m_star3;
                     break;
-                case "level_030":
+                case "Level_030":
                     button.unlocked = SaveLoadManagement.m_current.level_030.m_unlocked;
                     button.Star_One = SaveLoadManagement.m_current.level_030.m_star1;
                     button.Star_Two = SaveLoadManagement.m_current.level_030.m_star2;
