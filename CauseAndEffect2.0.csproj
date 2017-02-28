@@ -52,9 +52,6 @@
     <Reference Include="UnityEngine">
       <HintPath>Library\UnityAssemblies\UnityEngine.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Advertisements">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Advertisements.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
@@ -69,9 +66,6 @@
     </Reference>
     <Reference Include="UnityEngine.HoloLens">
       <HintPath>Library\UnityAssemblies\UnityEngine.HoloLens.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Purchasing">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Purchasing.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.VR">
       <HintPath>Library\UnityAssemblies\UnityEngine.VR.dll</HintPath>
@@ -97,6 +91,7 @@
     <Compile Include="Assets\Scripts\Managers\GameSoundScript.cs" />
     <Compile Include="Assets\Scripts\Managers\InputManager.cs" />
     <Compile Include="Assets\Scripts\Managers\SoundScript.cs" />
+    <Compile Include="Assets\Scripts\Managers\StarManager.cs" />
     <Compile Include="Assets\Scripts\Objects\Ballista.cs" />
     <Compile Include="Assets\Scripts\Objects\BallistaArrow.cs" />
     <Compile Include="Assets\Scripts\Objects\BallistaTrigger.cs" />
@@ -121,13 +116,24 @@
     <Compile Include="Assets\Scripts\Platforms\MovingPlatfrm.cs" />
     <Compile Include="Assets\Scripts\Platforms\PlacementArea.cs" />
     <Compile Include="Assets\Scripts\Platforms\PlatformTrigger.cs" />
+    <Compile Include="Assets\Scripts\SaveSystem\LevelSelectButton.cs" />
+    <Compile Include="Assets\Scripts\SaveSystem\LevelSelectStar.cs" />
+    <Compile Include="Assets\Scripts\SaveSystem\LevelSelectUnlock.cs" />
+    <Compile Include="Assets\Scripts\SaveSystem\MainMenuLoad.cs" />
+    <Compile Include="Assets\Scripts\SaveSystem\SaveLoad.cs" />
+    <Compile Include="Assets\Scripts\SaveSystem\SaveLoadData.cs" />
+    <Compile Include="Assets\Scripts\SaveSystem\SaveLoadManagement.cs" />
+    <Compile Include="Assets\Scripts\SaveSystem\SaveLoadSettings.cs" />
+    <Compile Include="Assets\Scripts\SaveSystem\SaveSwitch.cs" />
     <Compile Include="Assets\Scripts\Test\ArrowBounceTest.cs" />
     <Compile Include="Assets\Scripts\Test\BlockNew.cs" />
     <Compile Include="Assets\Scripts\Test\BlockSpawn.cs" />
+    <Compile Include="Assets\Scripts\Test\ButtonOneLoadTest.cs" />
     <Compile Include="Assets\Scripts\Test\DebugRay.cs" />
     <Compile Include="Assets\Scripts\Test\DragMe.cs" />
     <Compile Include="Assets\Scripts\Test\DragPanel.cs" />
     <Compile Include="Assets\Scripts\Test\DropMe.cs" />
+    <Compile Include="Assets\Scripts\Test\LevelOneSaveTest.cs" />
     <Compile Include="Assets\Scripts\UI\LevelSelectUI.cs" />
     <Compile Include="Assets\Scripts\UI\Menu.cs" />
     <Compile Include="Assets\Scripts\UI\MenuManager.cs" />
@@ -135,6 +141,7 @@
     <Compile Include="Assets\Scripts\UI\PinchZoom.cs" />
     <Compile Include="Assets\Scripts\UI\RichochetTest.cs" />
     <Compile Include="Assets\Scripts\UI\ScrollRectSnap.cs" />
+    <Compile Include="Assets\Scripts\UI\StarUI.cs" />
     <Compile Include="Assets\Scripts\UI\ToggleButton.cs" />
     <Compile Include="Assets\Scripts\UI\UIDrag.cs" />
     <Compile Include="Assets\Scripts\UI\UIManager.cs" />
