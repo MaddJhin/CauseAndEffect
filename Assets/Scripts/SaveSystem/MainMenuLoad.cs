@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMenuLoad : MonoBehaviour {
 
@@ -12,4 +13,13 @@ public class MainMenuLoad : MonoBehaviour {
 
         SaveLoad.Load();
 	}
+
+    public void Button_Play()
+    {
+
+        if (GameSoundScript.instance != null)
+            GameSoundScript.instance.playUIButton();
+        
+        SceneManager.LoadScene(SaveSwitch.latestLevel);
+    }
 }

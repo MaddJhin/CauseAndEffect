@@ -11,8 +11,8 @@ public class Ballista : MonoBehaviour {
     public BallistaArrow arrow;
 #endif
 
-    public Sprite frame0;
-    public Sprite frame1;
+    //public Sprite frame0;
+    //public Sprite frame1;
     public SpriteRenderer ballistaSprite;
     public bool hasFired = false;
 
@@ -67,7 +67,7 @@ public class Ballista : MonoBehaviour {
             audio.Play();
             hasFired = true;
             arrow.Shoot();
-            ballistaSprite.sprite = frame1;
+            //ballistaSprite.sprite = frame1;
         }        
     }
 
@@ -107,7 +107,7 @@ public class Ballista : MonoBehaviour {
     public void GameReset()
     {
         hasFired = false;
-        ballistaSprite.sprite = frame0;
+        //ballistaSprite.sprite = frame0;
 
         arrow.transform.localPosition = arrowPos;
         arrowSprite.enabled = false;

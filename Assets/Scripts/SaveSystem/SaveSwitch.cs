@@ -4,7 +4,17 @@ using UnityEngine;
 
 public static class SaveSwitch
 {
-    
+
+    public static int latestLevel = 3;
+
+    public static void UpdateLatestLevel(int levelIndex)
+    {
+        if (levelIndex > latestLevel && levelIndex < 30)
+            latestLevel = levelIndex;
+
+        SaveLoad.Save();
+    }
+
     public static void UpdateStars(string levelName, int starIndex)
     {
 

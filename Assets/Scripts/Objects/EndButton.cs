@@ -15,6 +15,11 @@ public class EndButton : MonoBehaviour {
         audio = GetComponent<AudioSource>();
     }
 
+    void Start()
+    {
+        SaveSwitch.UpdateLatestLevel(SceneManager.GetActiveScene().buildIndex);
+    }
+
     void OnCollisionEnter2D(Collision2D collider)
     {
         if(collider.gameObject.tag == "Block" || 
