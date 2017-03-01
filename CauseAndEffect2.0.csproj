@@ -90,6 +90,7 @@
     <Compile Include="Assets\Scripts\Camera\CameraControls.cs" />
     <Compile Include="Assets\Scripts\Camera\MobileCamera.cs" />
     <Compile Include="Assets\Scripts\Camera\TouchCamera.cs" />
+    <Compile Include="Assets\Scripts\DevCheats\UnlockLevels.cs" />
     <Compile Include="Assets\Scripts\Managers\AutoScroller.cs" />
     <Compile Include="Assets\Scripts\Managers\ChangeScene.cs" />
     <Compile Include="Assets\Scripts\Managers\GameEventManager.cs" />
