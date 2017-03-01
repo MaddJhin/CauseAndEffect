@@ -51,7 +51,7 @@ public class Star : MonoBehaviour {
         if (unlocked)
         {
             string levelName = SceneManager.GetActiveScene().name;
-            //SaveSwitch.UpdateStars(levelName, starIndex);
+            SaveSwitch.UpdateStars(levelName, starIndex);
         }
     }
 

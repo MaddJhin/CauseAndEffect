@@ -39,7 +39,7 @@ public static class SaveLoad
         {
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(Application.persistentDataPath + "/Francisco.InABox", FileMode.Open);
-            SaveLoad.m_savedGames = (SaveLoadManagement)bf.Deserialize(file);
+            SaveLoadManagement.m_current = (SaveLoadManagement)bf.Deserialize(file);
             file.Close();
         }
     }

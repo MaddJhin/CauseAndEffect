@@ -111,7 +111,6 @@ public class BallistaArrow : MonoBehaviour
     public void Shoot()
     {
         bouncesLeft = bounces;
-        sprite.enabled = true;
         col.enabled = true;
         //body.velocity = new Vector2(transform.right.x, transform.right.y) * speed;
         body.AddForce(transform.right * speed);
@@ -133,6 +132,7 @@ public class BallistaArrow : MonoBehaviour
         SetDirection();
         startPosition = transform.position;
         startRotation = transform.rotation;
+        sprite.enabled = true;
     }
 
     public void GameReset()
