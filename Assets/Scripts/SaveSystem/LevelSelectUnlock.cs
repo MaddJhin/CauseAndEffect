@@ -14,8 +14,8 @@ public class LevelSelectUnlock : MonoBehaviour {
 
     void SetButtons()
     {
-        //if (SaveLoadManagement.m_current == null)
-        //    SaveLoadManagement.m_current = new SaveLoadManagement();
+        if (SaveLoadManagement.m_current == null)
+            SaveLoadManagement.m_current = new SaveLoadManagement();
 
         SaveLoad.Load();
 

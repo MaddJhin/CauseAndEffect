@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class EndButton : MonoBehaviour {
 
     public int timesHit = 1;
+    public Text count;
 
     private int amountHit = 0;
 
@@ -13,6 +15,14 @@ public class EndButton : MonoBehaviour {
     void Awake()
     {
         audio = GetComponent<AudioSource>();
+    }
+
+    void Start()
+    {
+        if(SceneManager.GetActiveScene() != null)
+            SaveSwitch.UpdateLatestLevel(SceneManager.GetActiveScene().buildIndex);
+
+        count.text = timesHit.ToString();
     }
 
     void OnCollisionEnter2D(Collision2D collider)
@@ -25,10 +35,11 @@ public class EndButton : MonoBehaviour {
             audio.Play();
             DumpThing(collider.gameObject);
             amountHit++;
+            ReduceCount();
             if (amountHit == timesHit)
             {
                 string levelName = SceneManager.GetActiveScene().name;
-                //SaveSwitch.UpdateStars(levelName, 0);
+                SaveSwitch.UpdateStars(levelName, 0);
                 Debug.Log("Level name passed: " + levelName);
                 GameEventManager.TriggerLevelComplete();
             }
@@ -57,5 +68,11 @@ public class EndButton : MonoBehaviour {
     void OnDisable()
     {
         GameEventManager.GameReset -= GameReset;
+    }
+
+    void ReduceCount()
+    {
+        int hitsLeft = timesHit - amountHit;
+        count.text = hitsLeft.ToString();
     }
 }
