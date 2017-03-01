@@ -38,6 +38,9 @@ public class MobileCamera : MonoBehaviour
     {
         // Update Clamp Values
         UpdateClampValues();
+
+        if (GameManager.instance.dragging)
+            return;
         
         // If there is no touch press
         if (Input.touchCount == 0)
