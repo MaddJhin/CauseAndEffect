@@ -5,12 +5,10 @@ using UnityEngine;
 public static class SaveSwitch
 {
 
-    public static int latestLevel = 3;
-
     public static void UpdateLatestLevel(int levelIndex)
     {
-        if (levelIndex > latestLevel && levelIndex < 30)
-            latestLevel = levelIndex;
+        if (levelIndex > SaveLoadManagement.m_current.m_settingsData.latestLevel && levelIndex < 30)
+            SaveLoadManagement.m_current.m_settingsData.latestLevel = levelIndex;
 
         SaveLoad.Save();
     }

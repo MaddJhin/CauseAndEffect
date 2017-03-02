@@ -42,7 +42,8 @@ public class MenuManager : MonoBehaviour
 
     public void LevelComplete()
     {
-        ShowMenu(completionMenu);
+        if (completionMenu != null)
+            ShowMenu(completionMenu);
     }
 
     void OnEnable()
