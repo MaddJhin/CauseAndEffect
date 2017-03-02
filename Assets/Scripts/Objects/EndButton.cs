@@ -58,6 +58,7 @@ public class EndButton : MonoBehaviour {
     void GameReset()
     {
         amountHit = 0;
+        count.text = timesHit.ToString();
     }
 
     void OnEnable()

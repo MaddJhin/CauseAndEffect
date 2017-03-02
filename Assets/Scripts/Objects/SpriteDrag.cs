@@ -24,6 +24,9 @@ public class SpriteDrag : MonoBehaviour
 
     public void OnMouseDown()
     {
+        if (GameManager.instance.inPlay == true)
+            return;
+
         GameManager.instance.dragging = true;
 
         Vector3 offset = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -36,7 +39,10 @@ public class SpriteDrag : MonoBehaviour
     }
 
     public void OnMouseDrag()
-    { 
+    {
+        if (GameManager.instance.inPlay == true)
+            return;
+
         is_beingDragged = true;
         spawnArea.full = false;
 
@@ -56,7 +62,9 @@ public class SpriteDrag : MonoBehaviour
 
     public void OnMouseUp()
     {
-        
+        if (GameManager.instance.inPlay == true)
+            return;
+
         is_beingDragged = false;
         SetLayerRecursively(LayerMask.NameToLayer("Object"));
 

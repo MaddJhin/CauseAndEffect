@@ -17,10 +17,12 @@ public class Catapult : MonoBehaviour {
     private AudioSource source;
     private float clickTime;
     private CatapultBall catapultBall;
+    private Animator anim;
 
     void Awake()
     {
         source = GetComponent<AudioSource>();
+        anim = GetComponent<Animator>();
         //catapultImage = GetComponent<SpriteRenderer>();
     }
 
@@ -54,6 +56,7 @@ public class Catapult : MonoBehaviour {
             //StartCoroutine("CatapultAnimation");
             source.Play();
             hasFired = true;
+            anim.SetBool("Fired", true);
             catapultBall.Travel(ballForce, direction);
         }
     }
@@ -101,6 +104,7 @@ public class Catapult : MonoBehaviour {
     {
         //if (catapultImage.sprite != catapultAnimation[0])
         //    catapultImage.sprite = catapultAnimation[0];
+        anim.SetBool("Fired", false);
     }
 
     void OnDisable()
