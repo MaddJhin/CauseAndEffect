@@ -20,6 +20,6 @@ public class MainMenuLoad : MonoBehaviour {
         if (GameSoundScript.instance != null)
             GameSoundScript.instance.playUIButton();
         
-        SceneManager.LoadScene(SaveSwitch.latestLevel);
+        SceneManager.LoadScene(SaveLoadManagement.m_current.m_settingsData.latestLevel);
     }
 }
