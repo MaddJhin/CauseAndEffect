@@ -18,6 +18,7 @@ public class BallistaArrow : MonoBehaviour
     private LayerMask layerMask;
     private float dirrection = 1f;
     private AudioSource audio;
+    private bool hasFired = false;
 
     void Awake()
     {
@@ -53,6 +54,9 @@ public class BallistaArrow : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (!hasFired)
+            return;
+
         if (bouncesLeft == 0)
         {
             TurnOff();
@@ -100,6 +104,7 @@ public class BallistaArrow : MonoBehaviour
 
     public void TurnOff()
     {
+        hasFired = false;
         sprite.enabled = false;
         body.velocity = Vector2.zero;
         body.angularVelocity = 0f;
@@ -110,6 +115,7 @@ public class BallistaArrow : MonoBehaviour
 
     public void Shoot()
     {
+        hasFired = true;
         bouncesLeft = bounces;
         col.enabled = true;
         //body.velocity = new Vector2(transform.right.x, transform.right.y) * speed;

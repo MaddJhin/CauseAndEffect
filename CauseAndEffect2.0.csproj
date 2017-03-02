@@ -82,6 +82,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Camera\CameraControls.cs" />
+    <Compile Include="Assets\Scripts\Camera\CameraRatioController.cs" />
     <Compile Include="Assets\Scripts\Camera\MobileCamera.cs" />
     <Compile Include="Assets\Scripts\Camera\TouchCamera.cs" />
     <Compile Include="Assets\Scripts\DevCheats\UnlockLevels.cs" />
