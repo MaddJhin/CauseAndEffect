@@ -17,11 +17,15 @@ public class SaveLoadSettings
     // Providing two floats for audio
     public float m_musicVolume;
     public float m_soundVolume;
-	
+
+    public int latestLevel;
+
     // This is the default setting when first initialized.
     public SaveLoadSettings()
     {
         this.m_musicVolume = 100.0f;
         this.m_soundVolume = 100.0f;
+
+        this.latestLevel = 3;
     }
 }
