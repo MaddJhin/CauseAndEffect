@@ -30,6 +30,7 @@ public class BallistaArrow : MonoBehaviour
 
     void Start()
     {
+        col.enabled = false;
         layerMask = (1 << 0)
                 | (1 << 9)
                 | (1 << 10)
