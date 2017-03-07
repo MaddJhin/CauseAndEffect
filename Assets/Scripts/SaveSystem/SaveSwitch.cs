@@ -7,7 +7,7 @@ public static class SaveSwitch
 
     public static void UpdateLatestLevel(int levelIndex)
     {
-        if (levelIndex > SaveLoadManagement.m_current.m_settingsData.latestLevel && levelIndex < 30)
+        if (levelIndex > SaveLoadManagement.m_current.m_settingsData.latestLevel && levelIndex < 33)
             SaveLoadManagement.m_current.m_settingsData.latestLevel = levelIndex;
 
         SaveLoad.Save();
