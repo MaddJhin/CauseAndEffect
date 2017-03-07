@@ -96,23 +96,14 @@ public static class SaveSwitch
             case "Level_009":
                 SaveLoadManagement.m_current.level_010.m_unlocked = true;
                 if (starIndex == 0)
-                    SaveLoadManagement.m_current.level_008.m_star1 = true;
-                else if (starIndex == 1)
-                    SaveLoadManagement.m_current.level_008.m_star2 = true;
-                else if (starIndex == 2)
-                    SaveLoadManagement.m_current.level_008.m_star3 = true;
-                break;
-            case "Level_010":
-                SaveLoadManagement.m_current.level_011.m_unlocked = true;
-                if (starIndex == 0)
                     SaveLoadManagement.m_current.level_009.m_star1 = true;
                 else if (starIndex == 1)
                     SaveLoadManagement.m_current.level_009.m_star2 = true;
                 else if (starIndex == 2)
                     SaveLoadManagement.m_current.level_009.m_star3 = true;
                 break;
-            case "Level_011":
-                SaveLoadManagement.m_current.level_012.m_unlocked = true;
+            case "Level_010":
+                SaveLoadManagement.m_current.level_011.m_unlocked = true;
                 if (starIndex == 0)
                     SaveLoadManagement.m_current.level_010.m_star1 = true;
                 else if (starIndex == 1)
@@ -120,14 +111,23 @@ public static class SaveSwitch
                 else if (starIndex == 2)
                     SaveLoadManagement.m_current.level_010.m_star3 = true;
                 break;
-            case "Level_012":
-                SaveLoadManagement.m_current.level_013.m_unlocked = true;
+            case "Level_011":
+                SaveLoadManagement.m_current.level_012.m_unlocked = true;
                 if (starIndex == 0)
                     SaveLoadManagement.m_current.level_011.m_star1 = true;
                 else if (starIndex == 1)
                     SaveLoadManagement.m_current.level_011.m_star2 = true;
                 else if (starIndex == 2)
                     SaveLoadManagement.m_current.level_011.m_star3 = true;
+                break;
+            case "Level_012":
+                SaveLoadManagement.m_current.level_013.m_unlocked = true;
+                if (starIndex == 0)
+                    SaveLoadManagement.m_current.level_012.m_star1 = true;
+                else if (starIndex == 1)
+                    SaveLoadManagement.m_current.level_012.m_star2 = true;
+                else if (starIndex == 2)
+                    SaveLoadManagement.m_current.level_012.m_star3 = true;
                 break;
             case "Level_013":
                 SaveLoadManagement.m_current.level_014.m_unlocked = true;
